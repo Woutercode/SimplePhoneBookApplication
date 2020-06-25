@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Haloda.DataAccess.Data.Repository;
-using Haloda.DataAccess.Data.Repository.IRepository;
+﻿using SimplePhoneBook.DataAccess.Data.Repository;
+using SimplePhoneBook.DataAccess.Data.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace SimplePhoneBook.Pages.Admin.ProductType
+namespace SimplePhoneBook.Pages.SimplePhoneBook.PhoneBook
 {
     public class UpsertModel : PageModel
     {
@@ -20,16 +15,15 @@ namespace SimplePhoneBook.Pages.Admin.ProductType
         }
 
         [BindProperty]
-        public Haloda.Models.ProductType ProductTypeObj { get; set; }
+        public Models.PhoneBook PhoneBookObj { get; set; }
 
         public IActionResult OnGet(int? id)
         {
-            ProductTypeObj = new Haloda.Models.ProductType();
-            //check to make sure is is not nul and if it is then use GetFirstOrDefault
+            PhoneBookObj = new Models.PhoneBook();
             if (id != null)
             {
-                ProductTypeObj = _unitOfWork.ProductType.GetFirstOrDefault(u => u.Id == id);
-                if (ProductTypeObj == null)
+                PhoneBookObj = _unitOfWork.PhoneBook.GetFirstOrDefault(u => u.Id == id);
+                if (PhoneBookObj == null)
                 {
                     return NotFound();
                 }
@@ -37,20 +31,20 @@ namespace SimplePhoneBook.Pages.Admin.ProductType
             return Page();
         }
 
-        //make use of bindproperty on line 22 then no need to define inside OnPost Handler (Haloda.Models.ProductType ProductTypeObj)
-        public IActionResult OnPost(Haloda.Models.ProductType ProductTypeObj) //or else add above without using BindPropery
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            if (ProductTypeObj.Id == 0)
+            if (PhoneBookObj.Id == 0)
             {
-                _unitOfWork.ProductType.Add(ProductTypeObj);
+                _unitOfWork.PhoneBook.Add(PhoneBookObj);
             }
             else
             {
-                _unitOfWork.ProductType.Update(ProductTypeObj);
+                _unitOfWork.PhoneBook.Update(PhoneBookObj);
             }
             _unitOfWork.Save();
             return RedirectToPage("./Index");
