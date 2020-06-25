@@ -19,7 +19,7 @@ namespace SimplePhoneBook.DataAccess
 
         }
 
-        public DbSet<Entry> Entry { get; set; }
+        new public DbSet<Entry> Entry { get; set; }
         public DbSet<PhoneBook> PhoneBook { get; set; }
 
 
