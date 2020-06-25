@@ -1,0 +1,50 @@
+﻿@page
+@model SimplePhoneBook.Pages.SimplePhoneBook.PhoneBook.UpsertModel
+
+
+<!--Form is needed to post information-->
+<form method="post" asp-action="Upsert">
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @if (Model.PhoneBookObj.Id != 0)
+        {
+            <input type="hidden" asp-for="PhoneBookObj.Id" />
+        }
+
+        <div class="col-12 px-3" style="border-bottom:1px solid #ff6a00">
+            <h2 class="text-primary">@(Model.PhoneBookObj.Id!=0 ? "Update" : "Create") PhoneBook</h2>
+        </div>
+
+        <div class="col-8 pt-3">
+            <div class="form-group row">
+                <div class="col-3">
+                    <label asp-for="PhoneBookObj.Name"></label>
+                </div>
+                <div class="col-9">
+                    <input class="form-control" asp-for="PhoneBookObj.Name" />
+                    <span class="text-danger" asp-validation-for="PhoneBookObj.Name"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-9 offset-3">
+                    <div class="row">
+                        <div class="col-6">
+                            @if (Model.PhoneBookObj.Id != 0)
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Update</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary form-control">Create</button>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <a asp-page="./Index" class="btn btn-success form-control">Back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

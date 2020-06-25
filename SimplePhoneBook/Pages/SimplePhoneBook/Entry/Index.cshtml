@@ -1,0 +1,28 @@
+﻿@page
+@model SimplePhoneBook.Pages.SimplePhoneBook.Entry.IndexModel
+
+
+<div class="border backgroundWhite container">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Entry List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Upsert" class="btn btn-outline-primary"><i class="fas fa-plus"> &nbsp; Create New</i></a>
+        </div>
+    </div>
+    <br /><br />
+    <table id="DT_load" class="table table-secondary table-bordered text-dark" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>PhoneNumber</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section Scripts{
+    <script src="~/js/entry.js"></script>
+}
